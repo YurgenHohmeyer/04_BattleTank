@@ -24,3 +24,13 @@ ATank* ATankAIController::GetPlayerTank() const {
 	if (!PlayerPawn) { return nullptr; }
 	return Cast<ATank>(PlayerPawn);
 }
+
+void ATankAIController::Tick(float DeltaTime) {
+	Super::Tick( DeltaTime );
+
+	if (GetPlayerTank()) {
+		// TODO Move Towards the player
+		FString PlayerTankName = GetPlayerTank()->GetName();
+		GetControlledTank()->AimAt(PlayerTankName, GetPlayerTank()->GetActorLocation());
+	}
+}
