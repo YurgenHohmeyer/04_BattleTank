@@ -8,29 +8,19 @@ void ATankAIController::BeginPlay() {
 	Super::BeginPlay();
 }
 
-ATank* ATankAIController::GetControlledTank() const {
-	return Cast<ATank>(GetPawn());
-}
-
-ATank* ATankAIController::GetPlayerTank() const {
-	
-	return ;
-}
-
 void ATankAIController::Tick(float DeltaTime) {
 	Super::Tick( DeltaTime );
 
 	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	if (!PlayerTank) { return nullptr; }
+	auto ControlledTank = Cast<ATank>(GetPawn());
 
-	if (GetPlayerTank()) {
+	if (PlayerTank) {
 		// TODO Move Towards the player
 
 		// Aim towards the player
-		FString PlayerTankName = GetPlayerTank()->GetName();
-		GetControlledTank()->AimAt(PlayerTankName, GetPlayerTank()->GetActorLocation());
+		ControlledTank->AimAt("", PlayerTank->GetActorLocation());
 
-		GetControlledTank()->FireMainCannon();
+		ControlledTank->FireMainCannon(); // TODO limit firing rate
 
 	}
 }
