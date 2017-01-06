@@ -3,13 +3,18 @@
 #include "BattleTank_Unreal.h"
 #include "Public/Tank.h"
 
-
 // Sets default values
 ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	// No need to protect pointers as added at construction
+	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+}
+
+void ATank::SetBarrelReference(UStaticMeshComponent * BarrelToSet) {
+	TankAimingComponent->SetBarrelReference(BarrelToSet);
 }
 
 // Called when the game starts or when spawned
@@ -34,6 +39,5 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 }
 
 void ATank::AimAt(FString ObjectHit, FVector HitLocation) {
-	auto OurTankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s at location %s"), *OurTankName, *ObjectHit, *HitLocation.ToString());
+	TankAimingComponent->AimAt(ObjectHit, HitLocation, LaunchSpeed);
 }
