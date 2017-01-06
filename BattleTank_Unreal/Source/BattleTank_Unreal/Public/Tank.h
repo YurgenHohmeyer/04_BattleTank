@@ -15,14 +15,17 @@ class BATTLETANK_UNREAL_API ATank : public APawn
 {
 	GENERATED_BODY()
 
-public:
-	void AimAt(FString ObjectHit, FVector HitLocation);
-	
+public:	
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
+
+	void AimAt(FString ObjectHit, FVector HitLocation);
+
+	UFUNCTION(BlueprintCallable, Category = Weapons)
+	void FireMainCannon();
 
 protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
@@ -39,5 +42,5 @@ private:
 
 	// Projectile speed
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000; // TODO find sensible default (tank projectile speed)
+	float LaunchSpeed = 5000;
 };

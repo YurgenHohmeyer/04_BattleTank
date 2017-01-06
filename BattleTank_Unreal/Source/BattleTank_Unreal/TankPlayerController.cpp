@@ -29,8 +29,6 @@ void ATankPlayerController::AimTowardsCrosshair() {
 	if (GetCrosshairTraceHit(ObjectHit, HitLocation)) {
 		GetControlledTank()->AimAt(ObjectHit, HitLocation);
 	}
-
-	// UE_LOG(LogTemp, Warning, TEXT("Targeting: %s Location %s"), *ObjectHit, *HitLocation.ToString());
 }
 
 bool ATankPlayerController::GetCrosshairTraceHit(FString &ObjectHit, FVector &HitLocation) {

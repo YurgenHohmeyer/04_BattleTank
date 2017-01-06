@@ -39,3 +39,8 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 void ATank::AimAt(FString ObjectHit, FVector HitLocation) {
 	TankAimingComponent->AimAt(ObjectHit, HitLocation, LaunchSpeed);
 }
+
+void ATank::FireMainCannon() {
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f: Main Cannon Fired"), Time);
+}
