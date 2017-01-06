@@ -33,7 +33,10 @@ void UTankAimingComponent::AimAt(FString ObjectHit, FVector HitLocation, float L
 		StartLocation,
 		HitLocation,
 		LaunchSpeed,
-		ESuggestProjVelocityTraceOption::DoNotTrace
+		false,
+		0,
+		0,
+		ESuggestProjVelocityTraceOption::DoNotTrace // Param must be present to prevent bug
 	);
 
 	if (bHaveAimingSolution) {
