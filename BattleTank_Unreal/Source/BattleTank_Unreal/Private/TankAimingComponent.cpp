@@ -3,6 +3,7 @@
 #include "BattleTank_Unreal.h"
 #include "Public/TankBarrel.h"
 #include "Public/TankTurret.h"
+#include "Public/MainCannonProjectile.h"
 #include "Public/TankAimingComponent.h"
 
 
@@ -52,4 +53,22 @@ void UTankAimingComponent::AimTurretAndBarrel(FVector AimDirection) {
 	Barrel->Elevate(DeltaRotator.GetNormalized().Pitch);
 
 	Turret->Rotate(DeltaRotator.GetNormalized().Yaw);
+}
+
+void UTankAimingComponent::FireMainCannon() {
+	if (!ensure(Barrel && MainCannonProjectileBlueprint)) { return; }
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+
+	if (isReloaded) {
+
+		// Spawn a projectile at the socket location on the barrel
+		auto Projectile = GetWorld()->SpawnActor<AMainCannonProjectile>(
+			MainCannonProjectileBlueprint,
+			Barrel->GetSocketLocation(FName("Projectile")),
+			Barrel->GetSocketRotation(FName("Projectile"))
+			);
+
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
 }
