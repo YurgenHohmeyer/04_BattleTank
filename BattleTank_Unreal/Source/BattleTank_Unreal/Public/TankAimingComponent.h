@@ -33,6 +33,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Weapons")
 	void FireMainCannon();
 
+	EFiringStatus GetFiringState() const;
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringStatus FiringStatus = EFiringStatus::Reloading;

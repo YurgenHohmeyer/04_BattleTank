@@ -24,8 +24,8 @@ void ATankPlayerController::AimTowardsCrosshair() {
 
 	FVector HitLocation;
 	FString ObjectHit;
-
-	if (GetCrosshairTraceHit(ObjectHit, HitLocation)) {
+	bool bGotHitLocation = GetCrosshairTraceHit(ObjectHit, HitLocation);
+	if (bGotHitLocation) {
 		AimingComponent->AimAt(ObjectHit, HitLocation);
 	}
 }

@@ -27,7 +27,6 @@ void UTankMovementComponent::IntendMoveForward(float Throw) {
 	// Protect Pointers
 	if (!LeftTrack || !RightTrack) { return; }
 	// Clamp throttle values to disallow a doubled speed from two different control inputs
-	Throw = FMath::Clamp<float>(Throw, -1, +1);
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 }
@@ -36,7 +35,6 @@ void UTankMovementComponent::IntendTurnRight(float Throw) {
 	// Protect Pointers
 	if (!LeftTrack || !RightTrack) { return; }
 	// Clamp throttle values to disallow a doubled speed from two different control inputs
-	Throw = FMath::Clamp<float>(Throw, -1, +1);
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
 }
