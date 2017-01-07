@@ -3,7 +3,6 @@
 #include "BattleTank_Unreal.h"
 #include "Public/TankBarrel.h"
 #include "Public/MainCannonProjectile.h"
-#include "Public/TankAimingComponent.h"
 #include "Public/Tank.h"
 
 // Sets default values
@@ -17,13 +16,6 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // Needed for BP Begin Play to run!
-
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
-}
-
-void ATank::AimAt(FString ObjectHit, FVector HitLocation) {
-	if (!ensure(TankAimingComponent)) { return; }
-	TankAimingComponent->AimAt(ObjectHit, HitLocation, LaunchSpeed);
 }
 
 void ATank::FireMainCannon() {
