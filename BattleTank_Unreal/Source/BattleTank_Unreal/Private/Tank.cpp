@@ -4,7 +4,6 @@
 #include "Public/TankBarrel.h"
 #include "Public/MainCannonProjectile.h"
 #include "Public/TankAimingComponent.h"
-#include "Public/TankMovementComponent.h"
 #include "Public/Tank.h"
 
 // Sets default values
@@ -18,13 +17,8 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // Needed for BP Begin Play to run!
-}
 
-// Called to bind functionality to input
-void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
-{
-	Super::SetupPlayerInputComponent(InputComponent);
-
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 void ATank::AimAt(FString ObjectHit, FVector HitLocation) {
@@ -48,4 +42,10 @@ void ATank::FireMainCannon() {
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
 	}
+}
+
+// Called to bind functionality to input
+void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent) {
+	Super::SetupPlayerInputComponent(InputComponent);
+
 }
