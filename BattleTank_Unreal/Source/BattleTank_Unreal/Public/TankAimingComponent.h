@@ -47,8 +47,12 @@ private:
 
 	void AimTurretAndBarrel(FVector AimDirection);
 
+	bool IsBarrelMoving();
+
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
+
+	FVector AimDirection;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Weapons")
 	float LaunchSpeed = 4000;
