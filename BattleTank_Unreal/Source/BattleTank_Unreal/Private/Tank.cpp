@@ -29,6 +29,7 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 }
 
 void ATank::AimAt(FString ObjectHit, FVector HitLocation) {
+	if (!TankAimingComponent) { return; }
 	TankAimingComponent->AimAt(ObjectHit, HitLocation, LaunchSpeed);
 }
 
