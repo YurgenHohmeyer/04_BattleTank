@@ -34,6 +34,9 @@ protected:
 	EFiringStatus FiringStatus = EFiringStatus::Aiming;
 
 private:
+	// Sets default values for this component's properties
+	UTankAimingComponent();
+
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 

@@ -19,7 +19,7 @@ class BATTLETANK_UNREAL_API ATank : public APawn
 public:	
 	void AimAt(FString ObjectHit, FVector HitLocation);
 
-	UFUNCTION(BlueprintCallable, Category = Weapons)
+	UFUNCTION(BlueprintCallable, Category = "Weapons")
 	void FireMainCannon();
 
 protected:
@@ -39,18 +39,18 @@ private:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
 
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AMainCannonProjectile> MainCannonProjectileBlueprint;
 
 	// Projectile speed
-	UPROPERTY(EditDefaultsOnly, Category = Weapons)
+	UPROPERTY(EditDefaultsOnly, Category = "Weapons")
 	float LaunchSpeed = 4000;
 
-	UPROPERTY(EditDefaultsOnly, Category = Weapons)
+	UPROPERTY(EditDefaultsOnly, Category = "Weapons")
 	float ReloadTimeInSeconds = 3;
 
 	// Local barrel reference for spawning projectile    
-	UTankBarrel* Barrel = nullptr;
+	UTankBarrel* Barrel = nullptr; // TODO Remove
 
 	double LastFireTime = 0;
 };
