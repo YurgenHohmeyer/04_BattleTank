@@ -17,8 +17,7 @@ ATank::ATank()
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
-	Super::BeginPlay();
-	
+	Super::BeginPlay(); // Needed for BP Begin Play to run!
 }
 
 // Called to bind functionality to input
@@ -29,13 +28,15 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 }
 
 void ATank::AimAt(FString ObjectHit, FVector HitLocation) {
-	if (!TankAimingComponent) { return; }
+	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(ObjectHit, HitLocation, LaunchSpeed);
 }
 
 void ATank::FireMainCannon() {
+	if (!ensure(Barrel)) { return; }
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-	if (Barrel && isReloaded) {
+
+	if (isReloaded) {
 
 		// Spawn a projectile at the socket location on the barrel
 		auto Projectile = GetWorld()->SpawnActor<AMainCannonProjectile>(
