@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Yurgen Hohmeyer 2017
 
 #include "BattleTank_Unreal.h"
 #include "Public/TankTrack.h"
@@ -20,21 +20,23 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 
 	auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention);
 	IntendTurnRight(RightThrow.Z);
-
-//	UE_LOG(LogTemp, Warning, TEXT("%s has forward throw: %f"), *TankName, ForwardThrow)
 }
 
 
 void UTankMovementComponent::IntendMoveForward(float Throw) {
+	// Protect Pointers
 	if (!LeftTrack || !RightTrack) { return; }
+	// Clamp throttle values to disallow a doubled speed from two different control inputs
+	Throw = FMath::Clamp<float>(Throw, -1, +1);
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
-	// TODO prevent double-speed due to dual control use
 }
 
 void UTankMovementComponent::IntendTurnRight(float Throw) {
+	// Protect Pointers
 	if (!LeftTrack || !RightTrack) { return; }
+	// Clamp throttle values to disallow a doubled speed from two different control inputs
+	Throw = FMath::Clamp<float>(Throw, -1, +1);
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
-	// TODO prevent double-speed due to dual control use
 }
