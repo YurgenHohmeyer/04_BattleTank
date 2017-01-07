@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Yurgen Hohmeyer 2017
 
 #pragma once
 
@@ -8,7 +8,6 @@
 // Forward declaration
 class UTankBarrel;
 class UTankAimingComponent;
-class UTankTurret;
 class UTankMovementComponent;
 class AMainCannonProjectile;
 
@@ -18,12 +17,6 @@ class BATTLETANK_UNREAL_API ATank : public APawn
 	GENERATED_BODY()
 
 public:	
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(UTankTurret* TurretToSet);
-
 	void AimAt(FString ObjectHit, FVector HitLocation);
 
 	UFUNCTION(BlueprintCallable, Category = Weapons)
