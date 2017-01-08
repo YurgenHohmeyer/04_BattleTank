@@ -46,13 +46,6 @@ EFiringStatus UTankAimingComponent::GetFiringState() const {
 	return FiringStatus;
 }
 
-
-bool UTankAimingComponent::IsBarrelMoving() {
-	if (!ensure(Barrel)) { return false; }
-	auto BarrelForward = Barrel->GetForwardVector();
-	return !BarrelForward.Equals(AimDirection, 0.01);
-}
-
 void UTankAimingComponent::AimAt(FString ObjectHit, FVector HitLocation) {
 	if (!ensure(Barrel && Turret)) { return; }
 
@@ -76,6 +69,12 @@ void UTankAimingComponent::AimAt(FString ObjectHit, FVector HitLocation) {
 		AimTurretAndBarrel(AimDirection);
 	} // No aim solution found
 } 
+
+bool UTankAimingComponent::IsBarrelMoving() {
+	if (!ensure(Barrel)) { return false; }
+	auto BarrelForward = Barrel->GetForwardVector();
+	return !BarrelForward.Equals(AimDirection, 0.01);
+}
 
 void UTankAimingComponent::AimTurretAndBarrel(FVector AimDirection) {
 	if (!ensure(Barrel && Turret)) { return; }
