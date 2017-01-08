@@ -10,6 +10,14 @@ AMainCannonProjectile::AMainCannonProjectile()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Collision Mesh"));
+	SetRootComponent(CollisionMesh);
+	CollisionMesh->SetNotifyRigidBodyCollision(true);
+	CollisionMesh->SetVisibility(false);
+
+	LaunchBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("Launch Blast"));
+	LaunchBlast->AttachTo(RootComponent);
+
 	MainCannonProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Main Cannon Projectile Component"));
 	MainCannonProjectileMovement->bAutoActivate = false;
 }
