@@ -14,6 +14,9 @@ UCLASS()
 class BATTLETANK_UNREAL_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+public:
+	UFUNCTION()
+	void OnPossedTankDeath();
 
 protected:
 
@@ -21,6 +24,7 @@ protected:
 	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 	
 private:
+	virtual void SetPawn(APawn* InPawn) override;
 
 	virtual void BeginPlay() override;
 	
